@@ -120,6 +120,13 @@ LD_PRELOAD=$PRJHOME/mpk-library/build/libmpk.so ./sync_semaphore-0fc9b6fec82f8c5
 LD_PRELOAD=$PRJHOME/mpk-library/build/libmpk.so ./signal-9123367a9386d186 --bench
 ```
 
+### Issues with building the project? Or Just need to run benchmarks?
+If you are experiencing any issues with building the project or just want to run the benchmarks,
+please find the built version at our docker repository.
+You can install docker and run:
+```docker pull kayondo/trust
+```
+
 ## Authors
 - Inyoung Bang (Seoul National University) <iybang@sor.snu.ac.kr>
 - Martin Kayondo (Seoul National University) <kymartin@sor.snu.ac.kr>
