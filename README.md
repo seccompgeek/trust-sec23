@@ -124,7 +124,8 @@ LD_PRELOAD=$PRJHOME/mpk-library/build/libmpk.so ./signal-9123367a9386d186 --benc
 If you are experiencing any issues with building the project or just want to run the benchmarks,
 please find the built version at our docker repository.
 You can install docker and run:
-```docker pull kayondo/trust
+```sh
+docker pull kayondo/trust
 ```
 
 ## Authors
