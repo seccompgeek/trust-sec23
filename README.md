@@ -127,6 +127,7 @@ You can install docker and run:
 ```sh
 docker pull kayondo/trust
 ```
+Please note that the image size is a bit large, requiring at least 17GB of disk space.
 
 ## Authors
 - Inyoung Bang (Seoul National University) <iybang@sor.snu.ac.kr>
