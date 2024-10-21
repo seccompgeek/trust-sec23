@@ -221,7 +221,9 @@ bool X86MPKIsolation::runOnMachineFunction(MachineFunction &MF) {
         addRegOffset(saveECX, X86::R15, false, 20).addReg(X86::ECX);
         BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::ECX).addImm(0);
         BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::EDX).addImm(0);
-        BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::EAX).addImm(0);
+	BuildMI(BB, MI, DL, TII->get(X86::RDPKRUr));
+	BuildMI(BB, MI, DL, TII->get(X86::OR32ri), X86::EAX).addImm(2);
+        //BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::EAX).addImm(2);
         BuildMI(BB, MI, DL, TII->get(X86::WRPKRUr));
         auto restoreEDX = BuildMI(BB, MI, DL, TII->get(X86::MOV32rm), X86::EDX);
         addRegOffset(restoreEDX, X86::R15, false, 16);
@@ -238,7 +240,9 @@ bool X86MPKIsolation::runOnMachineFunction(MachineFunction &MF) {
         addRegOffset(saveECX, X86::R15, false, 20).addReg(X86::ECX);
         BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::ECX).addImm(0);
         BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::EDX).addImm(0);
-        BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::EAX).addImm(0);
+	BuildMI(BB, MI, DL, TII->get(X86::RDPKRUr));
+	BuildMI(BB, MI, DL, TII->get(X86::AND8ri), X86::AL).addImm(0xF0).addReg(X86::AL);
+        //BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::EAX).addImm(0);
         BuildMI(BB, MI, DL, TII->get(X86::WRPKRUr));
 
         auto restoreEAX = BuildMI(BB, MI, DL, TII->get(X86::MOV32rm), X86::EAX);
