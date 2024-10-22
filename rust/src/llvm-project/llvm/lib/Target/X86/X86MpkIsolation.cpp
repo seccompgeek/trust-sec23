@@ -24,12 +24,16 @@
 #include "llvm/Support/Debug.h"
 #include "llvm/Target/TargetOptions.h"
 #include "llvm/Support/Alignment.h"
+#include "llvm/Support/CommandLine.h"
 
 using namespace llvm;
 
 #define X86_MPK_ISOLATION_NAME "X86 MPK Isolation"
 
 namespace {
+static cl::opt<bool> EnableTrustMpk(
+    "trust-enable-mpk", cl::init(false), cl::Hidden,
+    cl::desc("Enable real MPK protection"));
 class X86MPKIsolation: public MachineFunctionPass {
   enum MPKPROT{
     ProtRWX = 0b00,
@@ -222,7 +226,7 @@ bool X86MPKIsolation::runOnMachineFunction(MachineFunction &MF) {
         BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::ECX).addImm(0);
         BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::EDX).addImm(0);
 	BuildMI(BB, MI, DL, TII->get(X86::RDPKRUr));
-	BuildMI(BB, MI, DL, TII->get(X86::OR32ri), X86::EAX).addImm(2);
+	BuildMI(BB, MI, DL, TII->get(X86::OR32ri), X86::EAX).addImm(EnableTrustMpk? 2: 0);
         //BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::EAX).addImm(2);
         BuildMI(BB, MI, DL, TII->get(X86::WRPKRUr));
         auto restoreEDX = BuildMI(BB, MI, DL, TII->get(X86::MOV32rm), X86::EDX);
