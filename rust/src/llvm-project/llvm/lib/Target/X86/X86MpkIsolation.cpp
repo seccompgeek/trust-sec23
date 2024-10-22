@@ -241,7 +241,7 @@ bool X86MPKIsolation::runOnMachineFunction(MachineFunction &MF) {
         BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::ECX).addImm(0);
         BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::EDX).addImm(0);
 	BuildMI(BB, MI, DL, TII->get(X86::RDPKRUr));
-	//BuildMI(BB, MI, DL, TII->get(X86::AND8ri), X86::AL).addImm(0xF0).addReg(X86::AL);
+	BuildMI(BB, MI, DL, TII->get(X86::AND8ri), X86::AL).addImm(0xF0);
         //BuildMI(BB, MI, DL, TII->get(X86::MOV32ri), X86::EAX).addImm(0);
         BuildMI(BB, MI, DL, TII->get(X86::WRPKRUr));
 
